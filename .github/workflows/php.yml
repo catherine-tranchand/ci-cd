@@ -1,0 +1,34 @@
+name: CI/CD module de connexion
+
+on: 
+  push:
+    branches: 
+      - main
+    tags:
+      - '*'  # Triggers for tags
+
+permissions: 
+  contents: read
+  packages: write
+
+jobs: 
+  ci-cd:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE: ghcr.io/catherine-tranchand/module-connexion
+      REGISTRY: ghcr.io
+
+    steps: 
+      - name: Print in console
+        run: echo Hello GH Actions!
+
+      - name: Checkout module-connexion Repo
+        uses: actions/checkout@v3
+        with: 
+          repository: catherine-tranchand/module-connexion
+          token: ${{ secrets.REPO_ACCES_TOKEN }}
+
+
+
+  
+ 
