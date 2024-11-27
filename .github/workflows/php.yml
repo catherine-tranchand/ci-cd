@@ -15,7 +15,7 @@ jobs:
   ci-cd:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: ghcr.io/catherine-tranchand/module-connexion
+      DOCKER_IMAGE: ghcr.io/catherine-tranchand/symfony-shop
       REGISTRY: ghcr.io
 
     steps: 
@@ -27,6 +27,7 @@ jobs:
         with: 
           repository: catherine-tranchand/symfony-shop
           token: ${{ secrets.REPO_ACCES_TOKEN }}
+      - name: 
 
 
 
