@@ -19,15 +19,21 @@ jobs:
       REGISTRY: ghcr.io
 
     steps: 
-      - name: Print in console
-        run: echo Hello GH Actions!
+      
+       # 1. Récupération du code source
 
       - name: Checkout symfony-shop Repo
         uses: actions/checkout@v3
         with: 
           repository: catherine-tranchand/symfony-shop
           token: ${{ secrets.REPO_ACCES_TOKEN }}
-      - name: 
+
+      # 2. Lancer les tests
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          cd symfony-shop
+          composer require symfonycasts/tailwind-bundle
 
 
 
