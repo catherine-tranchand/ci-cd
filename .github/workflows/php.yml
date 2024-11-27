@@ -28,6 +28,10 @@ jobs:
           repository: catherine-tranchand/symfony-shop
           token: ${{ secrets.SYMFONY_REPO_TOKEN }}
 
+      - name: List Workspace Files
+        run: ls -la
+
+
       # 2. Lancer les tests
       - name: Run tests
         run: |
