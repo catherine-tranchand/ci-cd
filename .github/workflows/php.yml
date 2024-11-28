@@ -1,4 +1,4 @@
-name: CI/CD module de connexion
+name: CI/CD symfony-shop
 
 on: 
   push:
@@ -38,7 +38,19 @@ jobs:
           echo "Running tests..."
           composer require symfonycasts/tailwind-bundle
           composer install
+  
+      # 3. Envoyer les notifications via GoogleChat
 
+      - name: Send Notifications to Google Chat
+      run: |
+          curl -X POST ${{ secrets.GOOGLE_CHAT_WEBHOOK }} \
+          -H 'Content-Type: application/json' \
+          -d '{
+                "text": "Pipeline Status: Success\n
+                Commit: ${{ github.sha }}\n
+                Branch/Tag: ${{ github.ref_name}}"
+          }'
+     if: success() || failure()      
 
 
 
