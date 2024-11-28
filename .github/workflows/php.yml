@@ -19,36 +19,34 @@ jobs:
       REGISTRY: ghcr.io
 
     steps: 
-      
-       # 1. Récupération du code source
-
+      # 1. Checkout the repository
       - name: Checkout symfony-shop Repo
         uses: actions/checkout@v3
         with: 
           repository: catherine-tranchand/symfony-shop
           token: ${{ secrets.SYMFONY_REPO_TOKEN }}
 
+      # 2. List workspace files
       - name: List Workspace Files
         run: ls -la
 
-
-      # 2. Lancer les tests
+      # 3. Run tests
       - name: Run tests
         run: |
           echo "Running tests..."
           composer require symfonycasts/tailwind-bundle
           composer install
   
-      # 3. Envoyer les notifications via GoogleChat
-
+      # 4. Send notifications via Google Chat
       - name: Send Notifications to Google Chat
         run: |
-        curl -X POST ${{ secrets.GOOGLE_CHAT_WEBHOOK }} \
-        -H "Content-Type: application/json" \
-        -d '{
-          "text": "Pipeline Status: Success\nCommit: '${{ github.sha }}'\nBranch/Tag: '${{ github.ref_name }}'"
-        }'
-       if: success() || failure()
+          curl -X POST ${{ secrets.GOOGLE_CHAT_WEBHOOK }} \
+          -H "Content-Type: application/json" \
+          -d '{
+            "text": "Pipeline Status: Success\nCommit: '${{ github.sha }}'\nBranch/Tag: '${{ github.ref_name }}'"
+          }'
+        if: always()
+
 
 
 
