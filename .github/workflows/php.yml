@@ -36,8 +36,17 @@ jobs:
           echo "Running tests..."
           composer require symfonycasts/tailwind-bundle
           composer install
+      
+      # 4. Construire l'image Docker
+      - name: Build Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: 
+          file: Dockerfile
+          push: false
+          tags: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
   
-      # 4. Send notifications via Google Chat
+      # 5. Send notifications via Google Chat
       - name: Send Notifications to Google Chat
         run: |
           curl -X POST "${{ secrets.GOOGLE_CHAT_WEBHOOK }}" \
