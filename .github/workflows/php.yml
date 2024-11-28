@@ -42,7 +42,7 @@ jobs:
       # 3. Envoyer les notifications via GoogleChat
 
       - name: Send Notifications to Google Chat
-      run: |
+        run: |
           curl -X POST ${{ secrets.GOOGLE_CHAT_WEBHOOK }} \
           -H 'Content-Type: application/json' \
           -d '{
@@ -50,7 +50,7 @@ jobs:
                 Commit: ${{ github.sha }}\n
                 Branch/Tag: ${{ github.ref_name}}"
           }'
-     if: success() || failure()      
+        if: success() || failure()      
 
 
 
