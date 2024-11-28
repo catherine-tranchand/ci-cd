@@ -43,14 +43,13 @@ jobs:
 
       - name: Send Notifications to Google Chat
         run: |
-          curl -X POST ${{ secrets.GOOGLE_CHAT_WEBHOOK }} \
-          -H 'Content-Type: application/json' \
-          -d '{
-                "text": "Pipeline Status: Success\n
-                Commit: ${{ github.sha }}\n
-                Branch/Tag: ${{ github.ref_name}}"
-          }'
-        if: success() || failure()      
+        curl -X POST ${{ secrets.GOOGLE_CHAT_WEBHOOK }} \
+        -H "Content-Type: application/json" \
+        -d '{
+          "text": "Pipeline Status: Success\nCommit: '${{ github.sha }}'\nBranch/Tag: '${{ github.ref_name }}'"
+        }'
+       if: success() || failure()
+
 
 
 
