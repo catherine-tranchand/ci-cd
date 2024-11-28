@@ -36,7 +36,6 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests..."
-          cd symfony-shop
           composer require symfonycasts/tailwind-bundle
           composer install
 
