@@ -41,9 +41,9 @@ jobs:
       - name: Build Docker Image
         uses: docker/build-push-action@v4
         with:
-          context: 
-          file: Dockerfile
-          push: false
+          context: ./symfony-shop
+          file: symfony-shop/Dockerfile
+          push: true
           tags: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
   
       # 5. Send notifications via Google Chat
@@ -52,7 +52,7 @@ jobs:
           curl -X POST "${{ secrets.GOOGLE_CHAT_WEBHOOK }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "text": "Pipeline Status: Success\nCommit: '${{ github.sha }}'\nBranch/Tag: '${{ github.ref_name }}'"
+            "text": "Pipeline Status: '${{ job.status }}'\nCommit: '${{ github.sha }}'\nBranch/Tag: '${{ github.ref_name }}'"
           }'
         if: always()
 
