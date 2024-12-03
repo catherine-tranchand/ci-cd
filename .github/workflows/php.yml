@@ -41,7 +41,6 @@ jobs:
       - name: Build Docker Image
         uses: docker/build-push-action@v4
         with:
-          context: ./symfony-shop
           file: symfony-shop/Dockerfile
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
